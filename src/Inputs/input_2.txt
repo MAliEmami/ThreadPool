@@ -1,0 +1,7 @@
+3
+Task1 500
+Task2 300
+Task3 200
+Task4 400
+Task5 100
+Task6 150

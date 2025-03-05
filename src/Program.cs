@@ -1,16 +1,20 @@
 ﻿using src.Models;
 
-// Example input parameters
-int maxThreads = 10;
-var tasks = new List<Action>
+string filePath = "./Inputs/input_2.txt";
+
+var lines = File.ReadAllLines(filePath);
+int maxThreads = int.Parse(lines[0]);
+
+List<Action> tasks = new List<Action>();
+foreach (var line in lines[1..]) // lines[1..] skip firts line because of maxThreads
 {
-    () => { Thread.Sleep(500); Console.WriteLine("Task 1 completed"); },
-    () => { Thread.Sleep(300); Console.WriteLine("Task 2 completed"); },
-    () => { Thread.Sleep(200); Console.WriteLine("Task 3 completed"); },
-    () => { Thread.Sleep(400); Console.WriteLine("Task 4 completed"); },
-    () => { Thread.Sleep(100); Console.WriteLine("Task 5 completed"); },
-    () => { Thread.Sleep(150); Console.WriteLine("Task 6 completed"); }
-};
+    var parts = line.Split(' ');
+    tasks.Add(() =>
+    {
+        Thread.Sleep(int.Parse(parts[1]));
+        Console.WriteLine($"{parts[0]} completed");
+    });
+}
 
 var simulation = new Simulation(maxThreads, tasks);
 simulation.Run();

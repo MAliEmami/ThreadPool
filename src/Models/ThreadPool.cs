@@ -35,8 +35,10 @@ public class ThreadPool
 
     private void WorkerThreadProc()
     {
-        while (_isRunning)
+        int w = 0;
+        while (_taskQueue.Count > 0)
         {
+            w++;
             Action? task = null;
             lock (_lock)
             {
@@ -52,7 +54,7 @@ public class ThreadPool
                 }
             }
 
-            task?.Invoke(); // Execute the task
+            task?.Invoke(); // execute task
             Interlocked.Increment(ref _completedTasks);
         }
     }
@@ -62,7 +64,7 @@ public class ThreadPool
         _isRunning = false;
         lock (_lock)
         {
-            Monitor.PulseAll(_lock); // Wake up all threads
+            Monitor.PulseAll(_lock);
         }
 
         foreach (var worker in _workerThreads)
@@ -73,5 +75,5 @@ public class ThreadPool
 
     public int AllocatedThreads => _allocatedThreads;
     public int CompletedTasks => _completedTasks;
-    public int UnusedThreads => _maxThreads - _allocatedThreads;
+    public int UnusedThreads => Math.Max(0, (_maxThreads - _allocatedThreads)); // if task more than therds it will me ngative number, but with Math.Max here will assign 0
 }

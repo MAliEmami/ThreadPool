@@ -34,7 +34,6 @@ namespace src.Models
                     taskInfo.EndTime = _stopwatch.ElapsedMilliseconds;
                     _taskInfos.Add(taskInfo);
                 };
-
                 _threadPool.AddTask(timedTask);
             }
 
