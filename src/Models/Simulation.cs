@@ -55,7 +55,7 @@ namespace src.Models
             Console.WriteLine("_____________________________ Task Timing Report ______________________________");
             foreach (var taskInfo in _taskInfos)
             {
-                Console.WriteLine($"Task {taskInfo.TaskId + 1}: Start Time = {taskInfo.StartTime} ms, End Time = {taskInfo.EndTime} ms, Duration = {taskInfo.Duration} ms");
+                Console.WriteLine($"Task {taskInfo.TaskId + 1}:\t Allocation = {taskInfo.StartTime} ms,\t Completion = {taskInfo.EndTime} ms,\t Duration = {taskInfo.Duration} ms");
             }
             Console.WriteLine("_______________________________________________________________________________\n");
         }

@@ -29,14 +29,14 @@ public class ThreadPool
         lock (_lock)
         {
             _taskQueue.Enqueue(task);
-            Monitor.Pulse(_lock); // Notify a waiting worker thread
+            Monitor.Pulse(_lock);
         }
     }
 
     private void WorkerThreadProc()
     {
         int w = 0;
-        while (_taskQueue.Count > 0)
+        while (_taskQueue.Count > 0 || _isRunning)
         {
             w++;
             Action? task = null;
