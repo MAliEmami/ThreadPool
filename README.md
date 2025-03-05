@@ -18,7 +18,7 @@ This project is the Final Project for the Operating Systems course at Bu-Ali Sin
 ### Installation
 1. Clone the repository:
    ```sh
-   git clone https://github.com/yourusername/ThreadPool-CSharp.git
+   git clone 
    cd ThreadPool
    ```
 2. Build the project:
